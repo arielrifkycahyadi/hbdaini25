@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun Aini! ✨</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS RESET & VARIABLES */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        :root {
+            --primary: #ff6584;
+            --primary-glow: rgba(255, 101, 132, 0.25);
+            --secondary: #6c5ce7;
+            --accent: #ff8da1;
+            --bg-light: #fff5f7;
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --card-border: rgba(255, 101, 132, 0.18);
+            --text-dark: #2d3436;
+            --text-muted: #636e72;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Quicksand', sans-serif;
+            --shadow-soft: 0 8px 32px 0 rgba(255, 101, 132, 0.12);
+        }
+
+        body {
+            background-color: var(--bg-light);
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(108, 92, 231, 0.08) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(255, 101, 132, 0.08) 0px, transparent 50%);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* BACKGROUND PARTICLES */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* CONTAINER & GLASS CARD */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            height: 600px;
+            max-height: 85vh;
+            z-index: 10;
+            position: relative;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* SLIDES MANAGER */
+        .slides-wrapper {
+            flex: 1;
+            display: flex;
+            position: relative;
+            width: 500%; /* 5 slides */
+            height: calc(100% - 70px);
+            transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .slide {
+            width: 20%;
+            height: 100%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* CUSTOM SCROLLBAR FOR SLIDES */
+        .slide::-webkit-scrollbar {
+            width: 6px;
+        }
+        .slide::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .slide::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        /* NAVIGATION & DOTS */
+        .navigation {
+            height: 70px;
+            border-top: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            background: rgba(255, 255, 255, 0.45);
+            z-index: 20;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(255, 101, 132, 0.05);
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 15px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            border-color: rgba(0, 0, 0, 0.1);
+            color: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.03);
+            cursor: not-allowed;
+        }
+
+        .dots-container {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        /* GRADIENT TEXT & TYPOGRAPHY */
+        .gradient-title {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #ff7597, #fbc2eb, #a18cd1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            max-width: 80%;
+            line-height: 1.5;
+        }
+
+        /* ---------------- SLIDE 1: HERO ---------------- */
+        .hero-photo-wrapper {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            box-shadow: 0 0 25px rgba(255, 117, 151, 0.3);
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(255, 117, 151, 0.3); }
+            100% { box-shadow: 0 0 35px rgba(142, 45, 226, 0.6); }
+        }
+
+        .hero-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--bg-light);
+        }
+
+        .hero-msg {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 85%;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 15px 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 101, 132, 0.15);
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(142, 45, 226, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(255, 117, 151, 0.6);
+        }
+
+        /* ---------------- SLIDE 2: KALIMBA ---------------- */
+        .kalimba-controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .kalimba-btn {
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 10px rgba(255, 101, 132, 0.05);
+        }
+
+        .kalimba-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .kalimba-btn.playing {
+            background: #e0245e;
+            border-color: #e0245e;
+            animation: pulse-red 1.5s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(224, 36, 94, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(224, 36, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(224, 36, 94, 0); }
+        }
+
+        .kalimba-board {
+            width: 100%;
+            max-width: 580px;
+            background: linear-gradient(180deg, #5c3a21 0%, #3d2310 100%);
+            border-radius: 12px 12px 24px 24px;
+            padding: 15px;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.2), 0 15px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        /* Sound hole */
+        .sound-hole {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #1a0f07;
+            border: 4px solid #2d1a0c;
+            box-shadow: inset 0 5px 10px rgba(0,0,0,0.8);
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .sound-hole::after {
+            content: 'AINI 🌸';
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .tines-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            height: 180px;
+            position: relative;
+            padding-top: 10px;
+            background: rgba(0,0,0,0.15);
+            border-radius: 6px;
+        }
+
+        /* Bridge */
+        .bridge {
+            position: absolute;
+            top: 0;
+            left: 5%;
+            width: 90%;
+            height: 8px;
+            background: #c0c0c0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+            border-radius: 2px;
+            z-index: 2;
+        }
+
+        .tine {
+            background: linear-gradient(to right, #cfd8dc 0%, #eceff1 40%, #b0bec5 60%, #90a4ae 100%);
+            width: calc(100% / 18 - 4px);
+            margin: 0 2px;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 2px 4px 6px rgba(0,0,0,0.4), inset 1px 0 #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 12px;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            transform-origin: top center;
+            transition: height 0.1s ease, filter 0.1s, transform 0.05s;
+        }
+
+        .tine:hover {
+            filter: brightness(1.1);
+        }
+
+        .tine:active, .tine.active {
+            transform: scaleY(0.97) translateY(2px);
+            filter: brightness(1.2) contrast(1.1);
+            background: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 100%);
+            box-shadow: 0 0 12px rgba(161, 196, 253, 0.8);
+        }
+
+        .note-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #37474f;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+            pointer-events: none;
+        }
+
+        .number-label {
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: #78909c;
+            margin-top: 2px;
+            pointer-events: none;
+        }
+
+        /* Song guide book */
+        .song-guide {
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 101, 132, 0.15);
+            border-radius: 10px;
+            padding: 10px 15px;
+            width: 100%;
+            max-width: 580px;
+            color: var(--text-dark);
+            text-align: left;
+        }
+
+        .song-guide span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* ---------------- SLIDE 3: COLLAGE ---------------- */
+        .collage-container {
+            width: 100%;
+            height: 320px;
+            position: relative;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .polaroid-deck {
+            position: relative;
+            width: 240px;
+            height: 290px;
+            perspective: 1000px;
+        }
+
+        .polaroid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            padding: 12px 12px 25px 12px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            cursor: pointer;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            background: #eee;
+        }
+
+        .polaroid-caption {
+            margin-top: 12px;
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            color: #2c3e50;
+            font-weight: 600;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        .collage-instructions {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* ---------------- GALLERY GRID STYLES ---------------- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 12px;
+            width: 100%;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 380px;
+        }
+
+        .gallery-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+        .gallery-grid::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .gallery-grid::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            aspect-ratio: 1 / 1;
+            border: 2px solid #fff;
+            background: #eee;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.06) rotate(1deg);
+            box-shadow: 0 8px 20px var(--primary-glow);
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-item::after {
+            content: attr(data-caption);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            color: #fff;
+            padding: 6px 4px;
+            font-size: 0.65rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* ---------------- SLIDE 5: WISH CAKE ---------------- */
+        .cake-container {
+            position: relative;
+            width: 180px;
+            height: 150px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        /* Cake elements designed with pure CSS */
+        .cake-base {
+            width: 150px;
+            height: 55px;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            border-radius: 8px 8px 15px 15px;
+            position: absolute;
+            bottom: 0;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .cake-cream {
+            width: 140px;
+            height: 35px;
+            background: #fff;
+            border-radius: 20px 20px 0 0;
+            position: absolute;
+            bottom: 45px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .cream-drip {
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            margin-top: 15px;
+        }
+
+        .candle {
+            width: 10px;
+            height: 50px;
+            background: repeating-linear-gradient(
+                45deg,
+                #ff7597,
+                #ff7597 5px,
+                #fff 5px,
+                #fff 10px
+            );
+            border-radius: 3px;
+            position: absolute;
+            bottom: 75px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+        }
+
+        .flame {
+            width: 12px;
+            height: 22px;
+            background: #ff9800;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px #ff9800, 0 0 20px #ffeb3b;
+            animation: flicker 0.1s ease-in-out infinite alternate;
+            transform-origin: bottom center;
+        }
+
+        .flame.extinguished {
+            display: none;
+        }
+
+        .smoke {
+            width: 2px;
+            height: 0px;
+            background: rgba(255, 255, 255, 0.4);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .smoke.active {
+            animation: riseSmoke 2s ease-out forwards;
+        }
+
+        @keyframes riseSmoke {
+            0% {
+                height: 5px;
+                width: 3px;
+                opacity: 0.8;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+            100% {
+                height: 30px;
+                width: 12px;
+                opacity: 0;
+                transform: translateX(-30%) translateY(-40px) scale(2);
+            }
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-1deg); }
+            100% { transform: translateX(-50%) scale(1.05) rotate(1deg); }
+        }
+
+        .wish-form {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .wish-input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 101, 132, 0.2);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            resize: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .wish-input:focus {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: var(--primary);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .wish-input::placeholder {
+            color: rgba(0, 0, 0, 0.35);
+        }
+
+        .blow-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, #ec008c 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 117, 151, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .blow-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 117, 151, 0.6);
+        }
+
+        /* ---------------- LETTER MODAL ---------------- */
+        .letter-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 240, 245, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .letter-modal.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .letter-card {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 101, 132, 0.2);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            transform: scale(0.8) translateY(30px);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .letter-modal.show .letter-card {
+            transform: scale(1) translateY(0);
+        }
+
+        .letter-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .letter-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .letter-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            text-align: left;
+            margin-bottom: 25px;
+            background: rgba(255, 101, 132, 0.06);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 101, 132, 0.12);
+            white-space: pre-line;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .letter-close-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .letter-close-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        /* ---------------- CONFETTI CANVAS ---------------- */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        /* ---------------- RESPONSIVE BREAKPOINTS ---------------- */
+        /* Tablet Devices */
+        @media (max-width: 900px) {
+            .container {
+                height: 580px;
+                max-height: 90vh;
+            }
+            .slide {
+                padding: 30px 20px;
+            }
+            .gallery-grid {
+                max-height: 320px;
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 10px;
+            }
+        }
+
+        /* Mobile Devices */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                height: 90vh;
+                min-height: 480px;
+                max-height: 620px;
+            }
+            .slides-wrapper {
+                height: calc(100% - 60px);
+            }
+            .slide {
+                padding: 20px 12px;
+            }
+            .gradient-title {
+                font-size: 1.5rem;
+                margin-bottom: 5px;
+            }
+            .subtitle {
+                font-size: 0.8rem;
+                margin-bottom: 15px;
+                max-width: 100%;
+            }
+            .hero-photo-wrapper {
+                width: 110px;
+                height: 110px;
+                margin-bottom: 15px;
+            }
+            .hero-msg {
+                font-size: 0.85rem;
+                padding: 10px 15px;
+                margin-bottom: 20px;
+                max-width: 100%;
+            }
+            .start-btn {
+                padding: 10px 25px;
+                font-size: 0.95rem;
+            }
+            .kalimba-board {
+                padding: 10px 5px;
+                margin-bottom: 10px;
+            }
+            .sound-hole {
+                width: 40px;
+                height: 40px;
+                margin: 8px 0;
+            }
+            .tines-container {
+                height: 130px;
+            }
+            .tine {
+                padding-bottom: 6px;
+            }
+            .note-label {
+                font-size: 0.5rem;
+            }
+            .number-label {
+                font-size: 0.45rem;
+            }
+            .polaroid-deck {
+                width: 170px;
+                height: 210px;
+            }
+            .polaroid img {
+                height: 130px;
+            }
+            .gallery-grid {
+                max-height: 250px;
+                grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+                gap: 8px;
+            }
+            .navigation {
+                height: 60px;
+                padding: 0 15px;
+            }
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particle Background -->
+    <div class="particle-container" id="particle-container"></div>
+
+    <!-- Main Container -->
+    <div class="container" id="main-container">
+        <!-- Slides Wrapper -->
+        <div class="slides-wrapper" id="slides-wrapper">
+            
+            <!-- Slide 1: Hero -->
+            <div class="slide" id="slide-1">
+                <div class="hero-photo-wrapper">
+                    <!-- Dynamic fallback to placeholder or standard loading if asset is slow -->
+                    <img class="hero-photo" src="assets/aini-hbd-main.png" alt="Aini" onerror="this.src='https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=400';">
+                </div>
+                <h1 class="gradient-title">Selamat Ulang Tahun, Aini! 🌸</h1>
+                <p class="subtitle">Nuraini Sukahar • 28 Juli 2026</p>
+                <div class="hero-msg">
+                    "Selamat ulang tahun ya, Aini! Di hari yang luar biasa manis ini, aku sengaja buatin halaman spesial ini khusus buat kamu. Selamat menjelajah ya! Dari teman lamamu, Ariel Usman."
+                </div>
+                <button class="start-btn" onclick="goToSlide(1)">Mulai Perjalanan ✨</button>
+            </div>
+
+            <!-- Slide 2: Kalimba -->
+            <div class="slide" id="slide-2">
+                <h2 class="gradient-title">Melodi Untuk Aini 🎵</h2>
+                <p class="subtitle">Alunan instrumen Kalimba kecil yang manis. Dengerin melodi otomatisnya atau mainin sendiri tuts logamnya!</p>
+                
+                <div class="kalimba-controls">
+                    <button class="kalimba-btn" id="autoplay-btn" onclick="toggleAutoplay()">
+                        <span id="autoplay-icon">▶️</span> <span id="autoplay-text">Mainkan Otomatis (Happy Birthday)</span>
+                    </button>
+                </div>
+
+                <div class="kalimba-board">
+                    <div class="bridge"></div>
+                    <div class="tines-container" id="tines-container">
+                        <!-- Keys will be dynamically generated by JS to keep code clean and correctly scaled -->
+                    </div>
+                    <div class="sound-hole"></div>
+                </div>
+
+                <div class="song-guide">
+                    <span>💡 Panduan Nada (HBD):</span> 1-1-2-1-4-3 | 1-1-2-1-5-4 | 1-1-i-6-4-3-2 | 7-7-6-4-5-4
+                </div>
+            </div>
+
+            <!-- Slide 3: Collage -->
+            <div class="slide" id="slide-3">
+                <h2 class="gradient-title">Momen Indah Kita 📸</h2>
+                <p class="subtitle">Beberapa cuplikan kenangan foto terindah kamu yang selalu penuh keceriaan.</p>
+                
+                <div class="collage-container">
+                    <div class="polaroid-deck" id="polaroid-deck">
+                        <!-- Polaroid elements will be shuffled and rendered by JS -->
+                    </div>
+                </div>
+                
+                <p class="collage-instructions">Sentuh fotonya untuk menaruhnya ke belakang dan melihat foto berikutnya ✨</p>
+            </div>
+
+            <!-- Slide 4: Fullscreen Gallery -->
+            <div class="slide" id="slide-4">
+                <h2 class="gradient-title">Galeri Foto Aini 💖</h2>
+                <p class="subtitle">Semua kenangan foto terindah kamu yang dikumpulkan dalam satu halaman galeri.</p>
+                <div class="gallery-grid" id="gallery-grid">
+                    <!-- populated by JS -->
+                </div>
+            </div>
+
+            <!-- Slide 5: Wish & Cake -->
+            <div class="slide" id="slide-5">
+                <h2 class="gradient-title">Make a Wish 🎂</h2>
+                <p class="subtitle">Tulis keinginan terbesarmu tahun ini di bawah ini, lalu tiup lilin kuenya ya!</p>
+                
+                <div class="cake-container">
+                    <div class="cake-base"></div>
+                    <div class="cake-cream">
+                        <div class="cream-drip"></div>
+                        <div class="cream-drip"></div>
+                        <div class="cream-drip"></div>
+                        <div class="cream-drip"></div>
+                        <div class="cream-drip"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="flame" id="cake-flame"></div>
+                        <div class="smoke" id="candle-smoke"></div>
+                    </div>
+                </div>
+
+                <div class="wish-form">
+                    <textarea class="wish-input" id="wish-input" rows="2" placeholder="Tulis harapan rahasiamu di sini... 💫" maxlength="150"></textarea>
+                    <button class="blow-btn" id="blow-btn" onclick="blowCandle()">Tiup Lilin & Kirim Harapan 🕯️💨</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Navigation Bar -->
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn" onclick="moveSlide(-1)" disabled>
+                &larr; Kembali
+            </button>
+            <div class="dots-container" id="dots-container">
+                <div class="dot active" onclick="goToSlide(0)"></div>
+                <div class="dot" onclick="goToSlide(1)"></div>
+                <div class="dot" onclick="goToSlide(2)"></div>
+                <div class="dot" onclick="goToSlide(3)"></div>
+                <div class="dot" onclick="goToSlide(4)"></div>
+            </div>
+            <button class="nav-btn" id="next-btn" onclick="moveSlide(1)">
+                Lanjut &rarr;
+            </button>
+        </div>
+    </div>
+
+    <!-- Letter Popup Modal -->
+    <div class="letter-modal" id="letter-modal">
+        <div class="letter-card">
+            <div class="letter-icon">✉️</div>
+            <h3 class="letter-title">Pesan dari Ariel Usman</h3>
+            <div class="letter-text" id="letter-text"></div>
+            <button class="letter-close-btn" onclick="closeLetter()">Sama-sama! ❤️</button>
+        </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <script>
+        // --- CONFIGURATION & STATE ---
+        let currentSlide = 0;
+        const totalSlides = 5;
+        const slidesWrapper = document.getElementById('slides-wrapper');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const dots = document.querySelectorAll('.dot');
+        
+        // --- PARTICLE BACKGROUND ---
+        const particleContainer = document.getElementById('particle-container');
+        const particleEmojis = ['🌸', '✨', '🎈', '💖', '⭐', '🍀'];
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.textContent = particleEmojis[Math.floor(Math.random() * particleEmojis.length)];
+            
+            const size = Math.random() * 12 + 10;
+            particle.style.fontSize = `${size}px`;
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.animationDuration = `${Math.random() * 6 + 6}s`;
+            particle.style.zIndex = '0';
+            
+            particleContainer.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 12000);
+        }
+        
+        // Spawn particles regularly
+        setInterval(createParticle, 4000);
+        for(let i = 0; i < 8; i++) {
+            setTimeout(createParticle, Math.random() * 5000);
+        }
+
+        // --- NAVIGATION LOGIC ---
+        function updateNavigation() {
+            slidesWrapper.style.transform = `translateX(-${currentSlide * 20}%)`;
+            
+            // Buttons
+            prevBtn.disabled = currentSlide === 0;
+            if (currentSlide === totalSlides - 1) {
+                nextBtn.innerText = 'Selesai 🏁';
+                nextBtn.disabled = true; // Blow cake is the finale
+            } else {
+                nextBtn.innerHTML = 'Lanjut &rarr;';
+                nextBtn.disabled = false;
+            }
+            
+            // Dots
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+
+            // Stop Autoplay if moving away from Kalimba
+            if (currentSlide !== 1 && isPlayingAutoplay) {
+                stopAutoplay();
+            }
+
+            updateTabIndices();
+        }
+
+        function updateTabIndices() {
+            const slide1Elements = document.querySelectorAll('#slide-1 button, #slide-1 a, #slide-1 input, #slide-1 textarea');
+            slide1Elements.forEach(el => el.setAttribute('tabindex', currentSlide === 0 ? '0' : '-1'));
+            
+            const slide2Elements = document.querySelectorAll('#slide-2 button, #slide-2 a, #slide-2 input, #slide-2 textarea');
+            slide2Elements.forEach(el => el.setAttribute('tabindex', currentSlide === 1 ? '0' : '-1'));
+            
+            const slide4Elements = document.querySelectorAll('#slide-4 button, #slide-4 a, #slide-4 input, #slide-4 textarea');
+            slide4Elements.forEach(el => el.setAttribute('tabindex', currentSlide === 3 ? '0' : '-1'));
+
+            const slide5Elements = document.querySelectorAll('#slide-5 button, #slide-5 a, #slide-5 input, #slide-5 textarea');
+            slide5Elements.forEach(el => el.setAttribute('tabindex', currentSlide === 4 ? '0' : '-1'));
+        }
+
+        function moveSlide(direction) {
+            currentSlide = Math.max(0, Math.min(totalSlides - 1, currentSlide + direction));
+            updateNavigation();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateNavigation();
+        }
+
+        // --- KALIMBA IMPLEMENTATION ---
+        const kalimbaTines = [
+            { note: 'D6', freq: 1174.66, label: 'D6', num: '17', height: 75 },
+            { note: 'B5', freq: 987.77, label: 'B5', num: '15', height: 85 },
+            { note: 'G5', freq: 783.99, label: 'G5', num: '13', height: 95 },
+            { note: 'E5', freq: 659.25, label: 'E5', num: '11', height: 105 },
+            { note: 'C5', freq: 523.25, label: 'C5', num: '9', height: 115 },
+            { note: 'A4', freq: 440.00, label: 'A4', num: '7', height: 125 },
+            { note: 'F4', freq: 349.23, label: 'F4', num: '5', height: 135 },
+            { note: 'D4', freq: 293.66, label: 'D4', num: '3', height: 145 },
+            { note: 'C4', freq: 261.63, label: 'C4', num: '1', height: 155 }, // Center
+            { note: 'E4', freq: 329.63, label: 'E4', num: '2', height: 140 },
+            { note: 'G4', freq: 392.00, label: 'G4', num: '4', height: 130 },
+            { note: 'B4', freq: 493.88, label: 'B4', num: '6', height: 120 },
+            { note: 'D5', freq: 587.33, label: 'D5', num: '8', height: 110 },
+            { note: 'F5', freq: 698.46, label: 'F5', num: '10', height: 100 },
+            { note: 'A5', freq: 880.00, label: 'A5', num: '12', height: 90 },
+            { note: 'C6', freq: 1046.50, label: 'C6', num: '14', height: 80 },
+            { note: 'E6', freq: 1318.51, label: 'E6', num: '16', height: 70 }
+        ];
+
+        let audioCtx = null;
+        
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        // Beautiful sound synthesis mimicking a clean wooden Kalimba
+        function playSound(freq) {
+            initAudio();
+            const now = audioCtx.currentTime;
+            
+            const osc1 = audioCtx.createOscillator();
+            const osc2 = audioCtx.createOscillator();
+            const osc3 = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            const filter = audioCtx.createBiquadFilter();
+
+            // Main tone
+            osc1.type = 'triangle';
+            osc1.frequency.setValueAtTime(freq, now);
+
+            // Chime / Overtones (adds metallic feel)
+            osc2.type = 'sine';
+            osc2.frequency.setValueAtTime(freq * 3, now); // 3rd harmonic
+            
+            osc3.type = 'sine';
+            osc3.frequency.setValueAtTime(freq * 5.2, now); // High bell harmonic
+
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(freq * 2.2, now);
+            filter.Q.setValueAtTime(1, now);
+
+            // Decay envelope
+            gainNode.gain.setValueAtTime(0, now);
+            gainNode.gain.linearRampToValueAtTime(0.4, now + 0.005);
+            gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 1.6);
+
+            // Connections
+            osc1.connect(filter);
+            osc2.connect(filter);
+            osc3.connect(filter);
+            
+            // Mix slightly lower volumes for harmonics
+            const gain2 = audioCtx.createGain();
+            const gain3 = audioCtx.createGain();
+            gain2.gain.setValueAtTime(0.12, now);
+            gain3.gain.setValueAtTime(0.04, now);
+            
+            osc2.connect(gain2);
+            osc3.connect(gain3);
+            
+            gain2.connect(filter);
+            gain3.connect(filter);
+
+            filter.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            osc1.start(now);
+            osc2.start(now);
+            osc3.start(now);
+            
+            osc1.stop(now + 1.8);
+            osc2.stop(now + 1.8);
+            osc3.stop(now + 1.8);
+        }
+
+        // Generate Kalimba HTML elements
+        const tinesContainer = document.getElementById('tines-container');
+        kalimbaTines.forEach(tineInfo => {
+            const tine = document.createElement('div');
+            tine.className = 'tine';
+            tine.style.height = `${tineInfo.height}%`;
+            tine.id = `tine-${tineInfo.note}`;
+            tine.innerHTML = `
+                <div class="note-label">${tineInfo.label}</div>
+                <div class="number-label">${tineInfo.num}</div>
+            `;
+            
+            // Click / touch actions
+            const triggerPlay = () => {
+                playSound(tineInfo.freq);
+                tine.classList.add('active');
+                setTimeout(() => tine.classList.remove('active'), 150);
+            };
+            
+            tine.addEventListener('mousedown', triggerPlay);
+            tine.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                triggerPlay();
+            });
+            
+            tinesContainer.appendChild(tine);
+        });
+
+        // Autoplay song (Happy Birthday)
+        let isPlayingAutoplay = false;
+        let autoplayTimeout = null;
+        
+        const hbdSong = [
+            { note: 'C4', delay: 350 }, { note: 'C4', delay: 200 }, { note: 'D4', delay: 500 }, 
+            { note: 'C4', delay: 500 }, { note: 'F4', delay: 500 }, { note: 'E4', delay: 900 },
+            { note: 'C4', delay: 350 }, { note: 'C4', delay: 200 }, { note: 'D4', delay: 500 }, 
+            { note: 'C4', delay: 500 }, { note: 'G4', delay: 500 }, { note: 'F4', delay: 900 },
+            { note: 'C4', delay: 350 }, { note: 'C4', delay: 200 }, { note: 'C5', delay: 500 }, 
+            { note: 'A4', delay: 500 }, { note: 'F4', delay: 500 }, { note: 'E4', delay: 500 }, 
+            { note: 'D4', delay: 900 },
+            { note: 'C5', delay: 350 }, { note: 'C5', delay: 200 }, { note: 'A4', delay: 500 }, 
+            { note: 'F4', delay: 500 }, { note: 'G4', delay: 500 }, { note: 'F4', delay: 1000 }
+        ];
+
+        function playSongStep(index) {
+            if (!isPlayingAutoplay || index >= hbdSong.length) {
+                stopAutoplay();
+                return;
+            }
+
+            const step = hbdSong[index];
+            const tine = document.getElementById(`tine-${step.note}`);
+            const tineInfo = kalimbaTines.find(t => t.note === step.note);
+            
+            if (tine && tineInfo) {
+                playSound(tineInfo.freq);
+                tine.classList.add('active');
+                setTimeout(() => tine.classList.remove('active'), 150);
+            }
+
+            autoplayTimeout = setTimeout(() => {
+                playSongStep(index + 1);
+            }, step.delay);
+        }
+
+        function toggleAutoplay() {
+            initAudio();
+            if (isPlayingAutoplay) {
+                stopAutoplay();
+            } else {
+                isPlayingAutoplay = true;
+                document.getElementById('autoplay-icon').innerText = '⏹️';
+                document.getElementById('autoplay-text').innerText = 'Hentikan';
+                document.getElementById('autoplay-btn').classList.add('playing');
+                playSongStep(0);
+            }
+        }
+
+        function stopAutoplay() {
+            isPlayingAutoplay = false;
+            clearTimeout(autoplayTimeout);
+            document.getElementById('autoplay-icon').innerText = '▶️';
+            document.getElementById('autoplay-text').innerText = 'Mainkan Otomatis (Happy Birthday)';
+            document.getElementById('autoplay-btn').classList.remove('playing');
+        }
+
+        // --- COLLAGE OF MEMORIES ---
+        const polaroidData = [
+            { src: 'assets/aini-hbd-2.jpg', caption: 'aini-hbd-2' },
+            { src: 'assets/aini-hbd-3.jpg', caption: 'aini-hbd-3' },
+            { src: 'assets/aini-hbd-4.png', caption: 'aini-hbd-4' },
+            { src: 'assets/aini-hbd-5.png', caption: 'aini-hbd-5' },
+            { src: 'assets/aini-hbd-6.jpg', caption: 'aini-hbd-6' },
+            { src: 'assets/aini-hbd-7.jpg', caption: 'aini-hbd-7' },
+            { src: 'assets/aini-momen-bunga-1.jpg', caption: 'aini-momen-bunga-1' },
+            { src: 'assets/aini-momen-makan-ramen.jpg', caption: 'aini-momen-makan-ramen' },
+            { src: 'assets/aini-momen-bunga-2.jpg', caption: 'aini-momen-bunga-2' },
+            { src: 'assets/aini-momen-mall-nipah-1.jpg', caption: 'aini-momen-mall-nipah-1' },
+            { src: 'assets/aini-momen-mall-nipah-2.jpg', caption: 'aini-momen-mall-nipah-2' },
+            { src: 'assets/aini-momen-mall-nipah-3.jpg', caption: 'aini-momen-mall-nipah-3' },
+            { src: 'assets/aini-momen-mall-nipah-4.jpg', caption: 'aini-momen-mall-nipah-4' }
+        ];
+
+        const polaroidDeck = document.getElementById('polaroid-deck');
+        let currentPolaroidIndex = 0;
+
+        function buildPolaroids() {
+            polaroidDeck.innerHTML = '';
+            // Generate polaroids
+            polaroidData.forEach((data, index) => {
+                const card = document.createElement('div');
+                card.className = 'polaroid';
+                card.id = `polaroid-${index}`;
+                card.style.zIndex = polaroidData.length - index;
+                
+                // Slightly randomize initial rot
+                const rot = (Math.random() * 10 - 5).toFixed(2);
+                card.style.transform = `rotate(${rot}deg)`;
+                
+                card.innerHTML = `
+                    <img src="${data.src}" alt="Memory" onerror="this.src='https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=400';">
+                    <div class="polaroid-caption">${data.caption}</div>
+                `;
+                
+                // Shuffle action on click
+                card.addEventListener('click', () => {
+                    shuffleCard(index);
+                });
+                
+                polaroidDeck.appendChild(card);
+            });
+        }
+
+        function shuffleCard(index) {
+            const card = document.getElementById(`polaroid-${index}`);
+            if (!card) return;
+
+            // Slide out to the side
+            const randomDirection = Math.random() > 0.5 ? 250 : -250;
+            const randomRotation = Math.random() * 40 - 20;
+            card.style.transform = `translateX(${randomDirection}px) rotate(${randomRotation}deg) scale(0.95)`;
+            card.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Send to back of stack
+                polaroidData.forEach((_, idx) => {
+                    const c = document.getElementById(`polaroid-${idx}`);
+                    if (c) {
+                        let z = parseInt(c.style.zIndex);
+                        if (idx === index) {
+                            c.style.zIndex = 1;
+                        } else {
+                            c.style.zIndex = z + 1;
+                        }
+                    }
+                });
+                
+                // Return card to center, now at back of stack
+                const rot = (Math.random() * 10 - 5).toFixed(2);
+                card.style.transform = `translateX(0px) rotate(${rot}deg) scale(1)`;
+                card.style.opacity = '1';
+            }, 800);
+        }
+
+        // Automatic collage shuffling every 4.5 seconds
+        let collageTimer = null;
+        function startCollageAutoShuffle() {
+            if (collageTimer) clearInterval(collageTimer);
+            collageTimer = setInterval(() => {
+                if (currentSlide === 2) {
+                    shuffleCard(currentPolaroidIndex);
+                    currentPolaroidIndex = (currentPolaroidIndex + 1) % polaroidData.length;
+                }
+            }, 4500);
+        }
+
+        function buildGallery() {
+            const galleryGrid = document.getElementById('gallery-grid');
+            galleryGrid.innerHTML = '';
+            polaroidData.forEach(data => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.setAttribute('data-caption', data.caption);
+                item.innerHTML = `<img src="${data.src}" alt="Aini Gallery" onerror="this.src='https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=400';">`;
+                
+                item.addEventListener('click', () => {
+                    item.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        item.style.transform = '';
+                    }, 150);
+                });
+                
+                galleryGrid.appendChild(item);
+            });
+        }
+
+        buildPolaroids();
+        buildGallery();
+        startCollageAutoShuffle();
+
+        // --- CAKE BLOWING & CONFETTI ---
+        const confettiCanvas = document.getElementById('confetti-canvas');
+        const ctx = confettiCanvas.getContext('2d');
+        let confettiArray = [];
+        let confettiActive = false;
+
+        function resizeCanvas() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class ConfettiParticle {
+            constructor() {
+                this.x = Math.random() * confettiCanvas.width;
+                this.y = Math.random() * confettiCanvas.height - confettiCanvas.height;
+                this.size = Math.random() * 8 + 6;
+                this.color = `hsl(${Math.random() * 360}, 90%, 65%)`;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 5 + 3;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = Math.random() * 4 - 2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.rotation += this.rotationSpeed;
+                if (this.y > confettiCanvas.height) {
+                    this.y = -20;
+                    this.x = Math.random() * confettiCanvas.width;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.fillStyle = this.color;
+                ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+                ctx.restore();
+            }
+        }
+
+        function createConfettiShower() {
+            confettiArray = [];
+            for (let i = 0; i < 150; i++) {
+                confettiArray.push(new ConfettiParticle());
+            }
+            confettiActive = true;
+            animateConfetti();
+            
+            // Stop confetti after 7 seconds
+            setTimeout(() => {
+                confettiActive = false;
+                ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            }, 8000);
+        }
+
+        function animateConfetti() {
+            if (!confettiActive) return;
+            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            confettiArray.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateConfetti);
+        }
+
+        function blowCandle() {
+            const flame = document.getElementById('cake-flame');
+            const smoke = document.getElementById('candle-smoke');
+            const wishInput = document.getElementById('wish-input').value.trim();
+
+            if (flame.classList.contains('extinguished')) {
+                // Candle already blown
+                showLetter(wishInput);
+                return;
+            }
+
+            // Exinguish flame
+            flame.classList.add('extinguished');
+            smoke.classList.add('active');
+
+            // Play air/magic sound
+            initAudio();
+            if (audioCtx) {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(150, now);
+                osc.frequency.exponentialRampToValueAtTime(0.01, now + 0.8);
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.8);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(now + 0.8);
+            }
+
+            // Burst confetti!
+            createConfettiShower();
+
+            // Open letter after delay
+            setTimeout(() => {
+                showLetter(wishInput);
+            }, 1800);
+        }
+
+        function showLetter(wishText) {
+            const modal = document.getElementById('letter-modal');
+            const letterTextDiv = document.getElementById('letter-text');
+            
+            let wishParagraph = '';
+            if (wishText) {
+                wishParagraph = `\n\n*(Oh ya, harapan rahasia kamu: "${wishText}" udah dicatat sama semesta ya, semoga terkabul! ✨)*`;
+            }
+
+            const message = `Halo Aini,
+
+Selamat ulang tahun yang ke-25 ya! Senang banget rasanya bisa menjadi bagian dari perjalanan panjang dan pertemanan kita selama ini. 
+
+Semoga di usia yang baru ini, kamu senantiasa diberikan kesehatan, kebahagiaan yang melimpah, dan hati yang selalu damai. Tetaplah menjadi sosok Aini yang ceria, baik hati, penuh semangat, dan menginspirasi ya!
+
+Semua doa terbaik untuk setiap langkah karir, kehidupan, dan impian besar yang sedang kamu kejar.${wishParagraph}
+
+Selamat merayakan hari spesialmu! 🥳🎂🎉
+
+Dengan tulus,
+Ariel Usman`;
+
+            letterTextDiv.innerText = message;
+            modal.classList.add('show');
+        }
+
+        function closeLetter() {
+            document.getElementById('letter-modal').classList.remove('show');
+            // Relight candle after close so they can play again if they want
+            setTimeout(() => {
+                document.getElementById('cake-flame').classList.remove('extinguished');
+                document.getElementById('candle-smoke').classList.remove('active');
+            }, 1000);
+        }
+
+        // Initialize state
+        updateNavigation();
+    </script>
+</body>
+</html>
